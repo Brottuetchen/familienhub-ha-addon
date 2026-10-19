@@ -1,0 +1,36 @@
+configuration:
+  timezone:
+    name: Time zone
+    description: IANA time zone of the household, e.g. Europe/Berlin. Used for dates, reminders and the calendar.
+  log_level:
+    name: Log level
+    description: How much the server writes to the add-on log.
+  setup_require_code:
+    name: Require setup code
+    description: The first admin account then needs the setup code from the add-on log. Turn this on if the hub is reachable from the internet before setup is done.
+  secure_cookies:
+    name: Secure cookies
+    description: Turn on only when the hub is served over HTTPS only (behind a reverse proxy). With plain HTTP on the local network, sign-in would fail.
+  public_url:
+    name: Public address
+    description: Address under which people reach the hub, e.g. https://hub.example.org. Used for links in notifications and for the OIDC redirect address. Optional.
+  cors_origins:
+    name: Allowed web origins (CORS)
+    description: Leave empty. Only needed when a web page on another address calls the API.
+  plugins_disabled:
+    name: Disabled plugins
+    description: Comma-separated plugin IDs to switch off, e.g. weather. Optional.
+  oidc_issuer:
+    name: OIDC issuer
+    description: Issuer URL of your identity provider (Authentik, Keycloak). Optional; needs Public address.
+  oidc_client_id:
+    name: OIDC client ID
+    description: Client ID registered at the identity provider.
+  oidc_client_secret:
+    name: OIDC client secret
+    description: Client secret registered at the identity provider.
+  oidc_auto_create:
+    name: Create accounts on first OIDC sign-in
+    description: Anyone the identity provider lets in gets an account. Restrict the application to your family at the provider first.
+network:
+  8000/tcp: Web app and API (also the address for the Android/iOS app)

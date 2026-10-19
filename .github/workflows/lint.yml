@@ -1,0 +1,34 @@
+name: Lint
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  addon-linter:
+    name: Add-on linter
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: frenck/action-addon-linter@v2
+        with:
+          path: ./familienhub
+  yaml:
+    name: YAML and shell
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate YAML
+        run: |
+          pip install --quiet pyyaml
+          python - <<'PY'
+          import glob, yaml
+          files = ["repository.yaml", *glob.glob("familienhub/**/*.yaml", recursive=True), *glob.glob(".github/**/*.yml", recursive=True)]
+          for f in files:
+              yaml.safe_load(open(f, encoding="utf-8"))
+              print("ok", f)
+          PY
+      - name: ShellCheck
+        run: shellcheck familienhub/run.sh

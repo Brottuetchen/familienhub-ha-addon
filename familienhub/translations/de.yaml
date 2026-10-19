@@ -1,0 +1,36 @@
+configuration:
+  timezone:
+    name: Zeitzone
+    description: IANA-Zeitzone des Haushalts, z. B. Europe/Berlin. Gilt für Termine, Erinnerungen und den Kalender.
+  log_level:
+    name: Log-Stufe
+    description: Wie viel der Server ins Add-on-Log schreibt.
+  setup_require_code:
+    name: Einrichtungscode verlangen
+    description: Das erste Admin-Konto braucht dann den Einrichtungscode aus dem Add-on-Log. Einschalten, wenn der Hub vor der Einrichtung aus dem Internet erreichbar ist.
+  secure_cookies:
+    name: Sichere Cookies
+    description: Nur einschalten, wenn der Hub ausschließlich über HTTPS erreichbar ist (hinter einem Reverse-Proxy). Bei reinem HTTP im Heimnetz würde die Anmeldung fehlschlagen.
+  public_url:
+    name: Öffentliche Adresse
+    description: Adresse, unter der die Familie den Hub erreicht, z. B. https://hub.example.org. Für Links in Benachrichtigungen und die OIDC-Rückkehradresse. Optional.
+  cors_origins:
+    name: Erlaubte Web-Herkünfte (CORS)
+    description: Leer lassen. Nur nötig, wenn eine Webseite unter anderer Adresse die API aufruft.
+  plugins_disabled:
+    name: Abgeschaltete Plugins
+    description: Kommagetrennte Plugin-IDs, die aus bleiben sollen, z. B. weather. Optional.
+  oidc_issuer:
+    name: OIDC-Issuer
+    description: Issuer-URL des Identitätsanbieters (Authentik, Keycloak). Optional; braucht die öffentliche Adresse.
+  oidc_client_id:
+    name: OIDC-Client-ID
+    description: Beim Identitätsanbieter registrierte Client-ID.
+  oidc_client_secret:
+    name: OIDC-Client-Secret
+    description: Beim Identitätsanbieter registriertes Client-Secret.
+  oidc_auto_create:
+    name: Konten bei erster OIDC-Anmeldung anlegen
+    description: Wer vom Identitätsanbieter durchgelassen wird, erhält ein Konto. Vorher die Anwendung beim Anbieter auf die Familie beschränken.
+network:
+  8000/tcp: Web-App und API (auch die Adresse für die Android-/iOS-App)

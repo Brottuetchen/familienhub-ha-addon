@@ -1,0 +1,44 @@
+name: Familienhub
+version: "1.0.0-beta.1"
+slug: familienhub
+description: Self-hosted family hub for calendar, tasks, shopping list and meals (server and web app)
+url: https://github.com/Brottuetchen/familienhub-ha-addon
+stage: experimental
+arch:
+  - amd64
+  - aarch64
+init: false
+startup: application
+boot: auto
+# SQLite database and generated keys live in /data; stop the add-on during backups for a consistent copy
+backup: cold
+# No ingress: the Flutter web app is built for the root path "/" and cannot run under the ingress prefix
+ports:
+  8000/tcp: 8000
+ports_description:
+  8000/tcp: Web app and API (also the address for the Android/iOS app)
+webui: "http://[HOST]:[PORT:8000]"
+options:
+  timezone: Europe/Berlin
+  log_level: info
+  setup_require_code: false
+  secure_cookies: false
+  public_url: ""
+  cors_origins: ""
+  plugins_disabled: ""
+  oidc_issuer: ""
+  oidc_client_id: ""
+  oidc_client_secret: ""
+  oidc_auto_create: false
+schema:
+  timezone: str
+  log_level: list(debug|info|warning|error)
+  setup_require_code: bool
+  secure_cookies: bool
+  public_url: str?
+  cors_origins: str?
+  plugins_disabled: str?
+  oidc_issuer: str?
+  oidc_client_id: str?
+  oidc_client_secret: password?
+  oidc_auto_create: bool
